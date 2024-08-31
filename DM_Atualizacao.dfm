@@ -1,14 +1,13 @@
 object DMDAtualizacao: TDMDAtualizacao
   OnCreate = DataModuleCreate
   Height = 480
-  Width = 640
+  Width = 861
   object conProducao: TFDConnection
     Params.Strings = (
       'Database=F:\git\atualizacao-meta\Win32\Debug\DADOS.FDB'
       'User_Name=SYSDBA'
       'Password=masterkey'
       'DriverID=fB')
-    Connected = True
     LoginPrompt = False
     Left = 72
     Top = 40
@@ -19,7 +18,6 @@ object DMDAtualizacao: TDMDAtualizacao
       'User_Name=SYSDBA'
       'Password=masterkey'
       'DriverID=fB')
-    Connected = True
     LoginPrompt = False
     Left = 72
     Top = 96
@@ -145,510 +143,638 @@ object DMDAtualizacao: TDMDAtualizacao
     Connection = conAtualizacao
     SQL.Strings = (
       'SELECT'
-      '    RDB$RELATIONS.RDB$RELATION_NAME AS NM_TABELA,'
-      '    RDB$RELATION_FIELDS.RDB$FIELD_NAME AS NM_FIELD,'
-      '    RDB$FIELDS.RDB$FIELD_TYPE AS TP_FIELD,'
-      '    RDB$FIELDS.RDB$FIELD_LENGTH AS NR_TAMANHO,'
-      '    RDB$FIELDS.RDB$FIELD_SCALE AS NR_CASASDECIMAL,'
-      '    RDB$RELATION_FIELDS.RDB$NULL_FLAG AS ST_NULL,'
-      '    RDB$FIELDS.RDB$DEFAULT_SOURCE AS DS_VALORPADRAO,'
-      '    RDB$FIELDS.RDB$FIELD_SUB_TYPE AS DS_SUBTIPO,'
-      '    RDB$FIELDS.RDB$CHARACTER_LENGTH AS NR_CARACTERES'
+      'TABFIELD.RDB$RELATION_NAME    AS TABELA,'
+      'TABFIELD.RDB$FIELD_NAME       AS CAMPO,'
+      'TABFIELD.RDB$DEFAULT_SOURCE   AS DEFAULT_VALUE,'
+      'TABFIELD.RDB$NULL_FLAG        AS NULL_FLAG,'
+      'TABFIELD.RDB$FIELD_POSITION   AS POSICAO,'
+      'TABFIELD.RDB$DESCRIPTION      AS ROTULO_CAMPO,'
+      'FIELDDEF.RDB$CHARACTER_LENGTH AS TAMANHO,'
+      'FIELDDEF.RDB$FIELD_PRECISION  AS PRECISAO,'
+      'FIELDDEF.RDB$FIELD_TYPE       AS TIPO,'
+      'FIELDDEF.RDB$FIELD_SUB_TYPE   AS SUBTIPO,'
+      'FIELDDEF.RDB$FIELD_SCALE      AS CASASDECIMAL,'
+      'FIELDDEF.RDB$FIELD_NAME       AS FIELD_CAMPO,'
+      'TABDESC.RDB$DESCRIPTION       AS ROTULA_TABELA'
+      ''
       'FROM'
-      '    RDB$RELATIONS'
-      'JOIN'
-      
-        '    RDB$RELATION_FIELDS ON RDB$RELATIONS.RDB$RELATION_NAME = RDB' +
-        '$RELATION_FIELDS.RDB$RELATION_NAME'
-      'JOIN'
-      
-        '    RDB$FIELDS ON RDB$RELATION_FIELDS.RDB$FIELD_SOURCE = RDB$FIE' +
-        'LDS.RDB$FIELD_NAME'
+      'RDB$RELATION_FIELDS TABFIELD'
+      ''
+      'JOIN RDB$FIELDS FIELDDEF ON'
+      'TABFIELD.RDB$FIELD_SOURCE = FIELDDEF.RDB$FIELD_NAME'
+      ''
+      'JOIN RDB$RELATIONS TABDESC ON'
+      'TABFIELD.RDB$RELATION_NAME = TABDESC.RDB$RELATION_NAME'
+      ''
       'WHERE'
-      '    RDB$RELATIONS.RDB$SYSTEM_FLAG = 0'
-      '    AND RDB$RELATIONS.RDB$VIEW_BLR IS NULL'
+      'TABFIELD.RDB$SYSTEM_FLAG = 0 AND'
+      'TABDESC.RDB$VIEW_SOURCE IS NULL'
+      ''
       'ORDER BY'
-      '    RDB$RELATIONS.RDB$RELATION_NAME,'
-      '    RDB$RELATION_FIELDS.RDB$FIELD_POSITION;'
-      '')
+      'TABFIELD.RDB$RELATION_NAME,'
+      'TABFIELD.RDB$FIELD_POSITION')
     Left = 360
     Top = 160
-    object QTabelaAtualizacaoNM_TABELA: TWideStringField
-      FieldName = 'NM_TABELA'
+    object QTabelaAtualizacaoTABELA: TWideStringField
+      FieldName = 'TABELA'
       Origin = 'RDB$RELATION_NAME'
       FixedChar = True
       Size = 31
     end
-    object QTabelaAtualizacaoNM_FIELD: TWideStringField
+    object QTabelaAtualizacaoCAMPO: TWideStringField
+      FieldName = 'CAMPO'
+      Origin = 'RDB$FIELD_NAME'
+      FixedChar = True
+      Size = 31
+    end
+    object QTabelaAtualizacaoDEFAULT_VALUE: TMemoField
+      FieldName = 'DEFAULT_VALUE'
+      Origin = 'RDB$DEFAULT_SOURCE'
+      BlobType = ftMemo
+    end
+    object QTabelaAtualizacaoNULL_FLAG: TSmallintField
+      FieldName = 'NULL_FLAG'
+      Origin = 'RDB$NULL_FLAG'
+    end
+    object QTabelaAtualizacaoPOSICAO: TSmallintField
+      FieldName = 'POSICAO'
+      Origin = 'RDB$FIELD_POSITION'
+    end
+    object QTabelaAtualizacaoROTULO_CAMPO: TMemoField
+      FieldName = 'ROTULO_CAMPO'
+      Origin = 'RDB$DESCRIPTION'
+      BlobType = ftMemo
+    end
+    object QTabelaAtualizacaoTAMANHO: TSmallintField
       AutoGenerateValue = arDefault
-      FieldName = 'NM_FIELD'
+      FieldName = 'TAMANHO'
+      Origin = 'RDB$CHARACTER_LENGTH'
+      ProviderFlags = []
+      ReadOnly = True
+    end
+    object QTabelaAtualizacaoPRECISAO: TSmallintField
+      AutoGenerateValue = arDefault
+      FieldName = 'PRECISAO'
+      Origin = 'RDB$FIELD_PRECISION'
+      ProviderFlags = []
+      ReadOnly = True
+    end
+    object QTabelaAtualizacaoTIPO: TSmallintField
+      AutoGenerateValue = arDefault
+      FieldName = 'TIPO'
+      Origin = 'RDB$FIELD_TYPE'
+      ProviderFlags = []
+      ReadOnly = True
+    end
+    object QTabelaAtualizacaoSUBTIPO: TSmallintField
+      AutoGenerateValue = arDefault
+      FieldName = 'SUBTIPO'
+      Origin = 'RDB$FIELD_SUB_TYPE'
+      ProviderFlags = []
+      ReadOnly = True
+    end
+    object QTabelaAtualizacaoCASASDECIMAL: TSmallintField
+      AutoGenerateValue = arDefault
+      FieldName = 'CASASDECIMAL'
+      Origin = 'RDB$FIELD_SCALE'
+      ProviderFlags = []
+      ReadOnly = True
+    end
+    object QTabelaAtualizacaoFIELD_CAMPO: TWideStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'FIELD_CAMPO'
       Origin = 'RDB$FIELD_NAME'
       ProviderFlags = []
       ReadOnly = True
       FixedChar = True
       Size = 31
     end
-    object QTabelaAtualizacaoTP_FIELD: TSmallintField
+    object QTabelaAtualizacaoROTULA_TABELA: TMemoField
       AutoGenerateValue = arDefault
-      FieldName = 'TP_FIELD'
-      Origin = 'RDB$FIELD_TYPE'
-      ProviderFlags = []
-      ReadOnly = True
-    end
-    object QTabelaAtualizacaoNR_TAMANHO: TSmallintField
-      AutoGenerateValue = arDefault
-      FieldName = 'NR_TAMANHO'
-      Origin = 'RDB$FIELD_LENGTH'
-      ProviderFlags = []
-      ReadOnly = True
-    end
-    object QTabelaAtualizacaoNR_CASASDECIMAL: TSmallintField
-      AutoGenerateValue = arDefault
-      FieldName = 'NR_CASASDECIMAL'
-      Origin = 'RDB$FIELD_SCALE'
-      ProviderFlags = []
-      ReadOnly = True
-    end
-    object QTabelaAtualizacaoST_NULL: TSmallintField
-      AutoGenerateValue = arDefault
-      FieldName = 'ST_NULL'
-      Origin = 'RDB$NULL_FLAG'
-      ProviderFlags = []
-      ReadOnly = True
-    end
-    object QTabelaAtualizacaoDS_VALORPADRAO: TMemoField
-      AutoGenerateValue = arDefault
-      FieldName = 'DS_VALORPADRAO'
-      Origin = 'RDB$DEFAULT_SOURCE'
+      FieldName = 'ROTULA_TABELA'
+      Origin = 'RDB$DESCRIPTION'
       ProviderFlags = []
       ReadOnly = True
       BlobType = ftMemo
-    end
-    object QTabelaAtualizacaoDS_SUBTIPO: TSmallintField
-      AutoGenerateValue = arDefault
-      FieldName = 'DS_SUBTIPO'
-      Origin = 'RDB$FIELD_SUB_TYPE'
-      ProviderFlags = []
-      ReadOnly = True
-    end
-    object QTabelaAtualizacaoNR_CARACTERES: TSmallintField
-      AutoGenerateValue = arDefault
-      FieldName = 'NR_CARACTERES'
-      Origin = 'RDB$CHARACTER_LENGTH'
-      ProviderFlags = []
-      ReadOnly = True
     end
   end
   object QTabelaProducao: TFDQuery
     Connection = conProducao
     SQL.Strings = (
       'SELECT'
-      '    RDB$RELATIONS.RDB$RELATION_NAME AS NM_TABELA,'
-      '    RDB$RELATION_FIELDS.RDB$FIELD_NAME AS NM_FIELD,'
-      '    RDB$FIELDS.RDB$FIELD_TYPE AS TP_FIELD,'
-      '    RDB$FIELDS.RDB$FIELD_LENGTH AS NR_TAMANHO,'
-      '    RDB$FIELDS.RDB$FIELD_SCALE AS NR_CASASDECIMAL,'
-      '    RDB$RELATION_FIELDS.RDB$NULL_FLAG AS ST_NULL,'
-      '    RDB$FIELDS.RDB$DEFAULT_SOURCE AS DS_VALORPADRAO,'
-      '    RDB$FIELDS.RDB$FIELD_SUB_TYPE AS DS_SUBTIPO,'
-      '    RDB$FIELDS.RDB$CHARACTER_LENGTH AS NR_CARACTERES'
+      'TABFIELD.RDB$RELATION_NAME    AS TABELA,'
+      'TABFIELD.RDB$FIELD_NAME       AS CAMPO,'
+      'TABFIELD.RDB$DEFAULT_SOURCE   AS DEFAULT_VALUE,'
+      'TABFIELD.RDB$NULL_FLAG        AS NULL_FLAG,'
+      'TABFIELD.RDB$FIELD_POSITION   AS POSICAO,'
+      'TABFIELD.RDB$DESCRIPTION      AS ROTULO_CAMPO,'
+      'FIELDDEF.RDB$CHARACTER_LENGTH AS TAMANHO,'
+      'FIELDDEF.RDB$FIELD_PRECISION  AS PRECISAO,'
+      'FIELDDEF.RDB$FIELD_TYPE       AS TIPO,'
+      'FIELDDEF.RDB$FIELD_SUB_TYPE   AS SUBTIPO,'
+      'FIELDDEF.RDB$FIELD_SCALE      AS CASASDECIMAL,'
+      'FIELDDEF.RDB$FIELD_NAME       AS FIELD_CAMPO,'
+      'TABDESC.RDB$DESCRIPTION       AS ROTULA_TABELA'
+      ''
       'FROM'
-      '    RDB$RELATIONS'
-      'JOIN'
-      
-        '    RDB$RELATION_FIELDS ON RDB$RELATIONS.RDB$RELATION_NAME = RDB' +
-        '$RELATION_FIELDS.RDB$RELATION_NAME'
-      'JOIN'
-      
-        '    RDB$FIELDS ON RDB$RELATION_FIELDS.RDB$FIELD_SOURCE = RDB$FIE' +
-        'LDS.RDB$FIELD_NAME'
+      'RDB$RELATION_FIELDS TABFIELD'
+      ''
+      'JOIN RDB$FIELDS FIELDDEF ON'
+      'TABFIELD.RDB$FIELD_SOURCE = FIELDDEF.RDB$FIELD_NAME'
+      ''
+      'JOIN RDB$RELATIONS TABDESC ON'
+      'TABFIELD.RDB$RELATION_NAME = TABDESC.RDB$RELATION_NAME'
+      ''
       'WHERE'
-      '    RDB$RELATIONS.RDB$SYSTEM_FLAG = 0'
-      '    AND RDB$RELATIONS.RDB$VIEW_BLR IS NULL'
+      'TABFIELD.RDB$SYSTEM_FLAG = 0 AND'
+      'TABDESC.RDB$VIEW_SOURCE IS NULL'
+      ''
       'ORDER BY'
-      '    RDB$RELATIONS.RDB$RELATION_NAME,'
-      '    RDB$RELATION_FIELDS.RDB$FIELD_POSITION;'
-      '')
+      'TABFIELD.RDB$RELATION_NAME,'
+      'TABFIELD.RDB$FIELD_POSITION')
     Left = 360
     Top = 48
-    object QTabelaProducaoNM_TABELA: TWideStringField
-      FieldName = 'NM_TABELA'
+    object QTabelaProducaoTABELA: TWideStringField
+      FieldName = 'TABELA'
       Origin = 'RDB$RELATION_NAME'
       FixedChar = True
       Size = 31
     end
-    object QTabelaProducaoNM_FIELD: TWideStringField
+    object QTabelaProducaoCAMPO: TWideStringField
+      FieldName = 'CAMPO'
+      Origin = 'RDB$FIELD_NAME'
+      FixedChar = True
+      Size = 31
+    end
+    object QTabelaProducaoDEFAULT_VALUE: TMemoField
+      FieldName = 'DEFAULT_VALUE'
+      Origin = 'RDB$DEFAULT_SOURCE'
+      BlobType = ftMemo
+    end
+    object QTabelaProducaoNULL_FLAG: TSmallintField
+      FieldName = 'NULL_FLAG'
+      Origin = 'RDB$NULL_FLAG'
+    end
+    object QTabelaProducaoPOSICAO: TSmallintField
+      FieldName = 'POSICAO'
+      Origin = 'RDB$FIELD_POSITION'
+    end
+    object QTabelaProducaoROTULO_CAMPO: TMemoField
+      FieldName = 'ROTULO_CAMPO'
+      Origin = 'RDB$DESCRIPTION'
+      BlobType = ftMemo
+    end
+    object QTabelaProducaoTAMANHO: TSmallintField
       AutoGenerateValue = arDefault
-      FieldName = 'NM_FIELD'
+      FieldName = 'TAMANHO'
+      Origin = 'RDB$CHARACTER_LENGTH'
+      ProviderFlags = []
+      ReadOnly = True
+    end
+    object QTabelaProducaoPRECISAO: TSmallintField
+      AutoGenerateValue = arDefault
+      FieldName = 'PRECISAO'
+      Origin = 'RDB$FIELD_PRECISION'
+      ProviderFlags = []
+      ReadOnly = True
+    end
+    object QTabelaProducaoTIPO: TSmallintField
+      AutoGenerateValue = arDefault
+      FieldName = 'TIPO'
+      Origin = 'RDB$FIELD_TYPE'
+      ProviderFlags = []
+      ReadOnly = True
+    end
+    object QTabelaProducaoSUBTIPO: TSmallintField
+      AutoGenerateValue = arDefault
+      FieldName = 'SUBTIPO'
+      Origin = 'RDB$FIELD_SUB_TYPE'
+      ProviderFlags = []
+      ReadOnly = True
+    end
+    object QTabelaProducaoCASASDECIMAL: TSmallintField
+      AutoGenerateValue = arDefault
+      FieldName = 'CASASDECIMAL'
+      Origin = 'RDB$FIELD_SCALE'
+      ProviderFlags = []
+      ReadOnly = True
+    end
+    object QTabelaProducaoFIELD_CAMPO: TWideStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'FIELD_CAMPO'
       Origin = 'RDB$FIELD_NAME'
       ProviderFlags = []
       ReadOnly = True
       FixedChar = True
       Size = 31
     end
-    object QTabelaProducaoTP_FIELD: TSmallintField
+    object QTabelaProducaoROTULA_TABELA: TMemoField
       AutoGenerateValue = arDefault
-      FieldName = 'TP_FIELD'
-      Origin = 'RDB$FIELD_TYPE'
-      ProviderFlags = []
-      ReadOnly = True
-    end
-    object QTabelaProducaoNR_TAMANHO: TSmallintField
-      AutoGenerateValue = arDefault
-      FieldName = 'NR_TAMANHO'
-      Origin = 'RDB$FIELD_LENGTH'
-      ProviderFlags = []
-      ReadOnly = True
-    end
-    object QTabelaProducaoNR_CASASDECIMAL: TSmallintField
-      AutoGenerateValue = arDefault
-      FieldName = 'NR_CASASDECIMAL'
-      Origin = 'RDB$FIELD_SCALE'
-      ProviderFlags = []
-      ReadOnly = True
-    end
-    object QTabelaProducaoST_NULL: TSmallintField
-      AutoGenerateValue = arDefault
-      FieldName = 'ST_NULL'
-      Origin = 'RDB$NULL_FLAG'
-      ProviderFlags = []
-      ReadOnly = True
-    end
-    object QTabelaProducaoDS_VALORPADRAO: TMemoField
-      AutoGenerateValue = arDefault
-      FieldName = 'DS_VALORPADRAO'
-      Origin = 'RDB$DEFAULT_SOURCE'
+      FieldName = 'ROTULA_TABELA'
+      Origin = 'RDB$DESCRIPTION'
       ProviderFlags = []
       ReadOnly = True
       BlobType = ftMemo
-    end
-    object QTabelaProducaoDS_SUBTIPO: TSmallintField
-      AutoGenerateValue = arDefault
-      FieldName = 'DS_SUBTIPO'
-      Origin = 'RDB$FIELD_SUB_TYPE'
-      ProviderFlags = []
-      ReadOnly = True
-    end
-    object QTabelaProducaoNR_CARACTERES: TSmallintField
-      AutoGenerateValue = arDefault
-      FieldName = 'NR_CARACTERES'
-      Origin = 'RDB$CHARACTER_LENGTH'
-      ProviderFlags = []
-      ReadOnly = True
     end
   end
   object TTabelaProducao: TJvMemoryData
     FieldDefs = <>
     Left = 360
     Top = 104
-    object TTabelaProducaoNM_TABELA: TWideStringField
-      FieldName = 'NM_TABELA'
+    object TTabelaProducaoTABELA: TWideStringField
+      FieldName = 'TABELA'
       Origin = 'RDB$RELATION_NAME'
       FixedChar = True
       Size = 31
     end
-    object TTabelaProducaoNM_FIELD: TWideStringField
+    object TTabelaProducaoCAMPO: TWideStringField
+      FieldName = 'CAMPO'
+      Origin = 'RDB$FIELD_NAME'
+      FixedChar = True
+      Size = 31
+    end
+    object TTabelaProducaoDEFAULT_VALUE: TMemoField
+      FieldName = 'DEFAULT_VALUE'
+      Origin = 'RDB$DEFAULT_SOURCE'
+      BlobType = ftMemo
+    end
+    object TTabelaProducaoNULL_FLAG: TSmallintField
+      FieldName = 'NULL_FLAG'
+      Origin = 'RDB$NULL_FLAG'
+    end
+    object TTabelaProducaoPOSICAO: TSmallintField
+      FieldName = 'POSICAO'
+      Origin = 'RDB$FIELD_POSITION'
+    end
+    object TTabelaProducaoROTULO_CAMPO: TMemoField
+      FieldName = 'ROTULO_CAMPO'
+      Origin = 'RDB$DESCRIPTION'
+      BlobType = ftMemo
+    end
+    object TTabelaProducaoTAMANHO: TSmallintField
       AutoGenerateValue = arDefault
-      FieldName = 'NM_FIELD'
+      FieldName = 'TAMANHO'
+      Origin = 'RDB$CHARACTER_LENGTH'
+      ProviderFlags = []
+    end
+    object TTabelaProducaoPRECISAO: TSmallintField
+      AutoGenerateValue = arDefault
+      FieldName = 'PRECISAO'
+      Origin = 'RDB$FIELD_PRECISION'
+      ProviderFlags = []
+    end
+    object TTabelaProducaoTIPO: TSmallintField
+      AutoGenerateValue = arDefault
+      FieldName = 'TIPO'
+      Origin = 'RDB$FIELD_TYPE'
+      ProviderFlags = []
+    end
+    object TTabelaProducaoSUBTIPO: TSmallintField
+      AutoGenerateValue = arDefault
+      FieldName = 'SUBTIPO'
+      Origin = 'RDB$FIELD_SUB_TYPE'
+      ProviderFlags = []
+    end
+    object TTabelaProducaoCASASDECIMAL: TSmallintField
+      AutoGenerateValue = arDefault
+      FieldName = 'CASASDECIMAL'
+      Origin = 'RDB$FIELD_SCALE'
+      ProviderFlags = []
+    end
+    object TTabelaProducaoFIELD_CAMPO: TWideStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'FIELD_CAMPO'
       Origin = 'RDB$FIELD_NAME'
       ProviderFlags = []
       FixedChar = True
       Size = 31
     end
-    object TTabelaProducaoTP_FIELD: TSmallintField
+    object TTabelaProducaoROTULA_TABELA: TMemoField
       AutoGenerateValue = arDefault
-      FieldName = 'TP_FIELD'
-      Origin = 'RDB$FIELD_TYPE'
-      ProviderFlags = []
-    end
-    object TTabelaProducaoNR_TAMANHO: TSmallintField
-      AutoGenerateValue = arDefault
-      FieldName = 'NR_TAMANHO'
-      Origin = 'RDB$FIELD_LENGTH'
-      ProviderFlags = []
-    end
-    object TTabelaProducaoNR_CASASDECIMAL: TSmallintField
-      AutoGenerateValue = arDefault
-      FieldName = 'NR_CASASDECIMAL'
-      Origin = 'RDB$FIELD_SCALE'
-      ProviderFlags = []
-    end
-    object TTabelaProducaoST_NULL: TSmallintField
-      AutoGenerateValue = arDefault
-      FieldName = 'ST_NULL'
-      Origin = 'RDB$NULL_FLAG'
-      ProviderFlags = []
-    end
-    object TTabelaProducaoDS_VALORPADRAO: TMemoField
-      AutoGenerateValue = arDefault
-      FieldName = 'DS_VALORPADRAO'
-      Origin = 'RDB$DEFAULT_SOURCE'
+      FieldName = 'ROTULA_TABELA'
+      Origin = 'RDB$DESCRIPTION'
       ProviderFlags = []
       BlobType = ftMemo
-    end
-    object TTabelaProducaoDS_SUBTIPO: TSmallintField
-      AutoGenerateValue = arDefault
-      FieldName = 'DS_SUBTIPO'
-      Origin = 'RDB$FIELD_SUB_TYPE'
-      ProviderFlags = []
-    end
-    object TTabelaProducaoNR_CARACTERES: TSmallintField
-      AutoGenerateValue = arDefault
-      FieldName = 'NR_CARACTERES'
-      Origin = 'RDB$CHARACTER_LENGTH'
-      ProviderFlags = []
     end
   end
   object TTabelaAtualizacao: TJvMemoryData
     FieldDefs = <>
     Left = 360
     Top = 224
-    object TTabelaAtualizacaoNM_TABELA: TWideStringField
-      FieldName = 'NM_TABELA'
+    object TTabelaAtualizacaoTABELA: TWideStringField
+      FieldName = 'TABELA'
       Origin = 'RDB$RELATION_NAME'
       FixedChar = True
       Size = 31
     end
-    object TTabelaAtualizacaoNM_FIELD: TWideStringField
+    object TTabelaAtualizacaoCAMPO: TWideStringField
+      FieldName = 'CAMPO'
+      Origin = 'RDB$FIELD_NAME'
+      FixedChar = True
+      Size = 31
+    end
+    object TTabelaAtualizacaoDEFAULT_VALUE: TMemoField
+      FieldName = 'DEFAULT_VALUE'
+      Origin = 'RDB$DEFAULT_SOURCE'
+      BlobType = ftMemo
+    end
+    object TTabelaAtualizacaoNULL_FLAG: TSmallintField
+      FieldName = 'NULL_FLAG'
+      Origin = 'RDB$NULL_FLAG'
+    end
+    object TTabelaAtualizacaoPOSICAO: TSmallintField
+      FieldName = 'POSICAO'
+      Origin = 'RDB$FIELD_POSITION'
+    end
+    object TTabelaAtualizacaoROTULO_CAMPO: TMemoField
+      FieldName = 'ROTULO_CAMPO'
+      Origin = 'RDB$DESCRIPTION'
+      BlobType = ftMemo
+    end
+    object TTabelaAtualizacaoTAMANHO: TSmallintField
       AutoGenerateValue = arDefault
-      FieldName = 'NM_FIELD'
+      FieldName = 'TAMANHO'
+      Origin = 'RDB$CHARACTER_LENGTH'
+      ProviderFlags = []
+    end
+    object TTabelaAtualizacaoPRECISAO: TSmallintField
+      AutoGenerateValue = arDefault
+      FieldName = 'PRECISAO'
+      Origin = 'RDB$FIELD_PRECISION'
+      ProviderFlags = []
+    end
+    object TTabelaAtualizacaoTIPO: TSmallintField
+      AutoGenerateValue = arDefault
+      FieldName = 'TIPO'
+      Origin = 'RDB$FIELD_TYPE'
+      ProviderFlags = []
+    end
+    object TTabelaAtualizacaoSUBTIPO: TSmallintField
+      AutoGenerateValue = arDefault
+      FieldName = 'SUBTIPO'
+      Origin = 'RDB$FIELD_SUB_TYPE'
+      ProviderFlags = []
+    end
+    object TTabelaAtualizacaoCASASDECIMAL: TSmallintField
+      AutoGenerateValue = arDefault
+      FieldName = 'CASASDECIMAL'
+      Origin = 'RDB$FIELD_SCALE'
+      ProviderFlags = []
+    end
+    object TTabelaAtualizacaoFIELD_CAMPO: TWideStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'FIELD_CAMPO'
       Origin = 'RDB$FIELD_NAME'
       ProviderFlags = []
       FixedChar = True
       Size = 31
     end
-    object TTabelaAtualizacaoTP_FIELD: TSmallintField
+    object TTabelaAtualizacaoROTULA_TABELA: TMemoField
       AutoGenerateValue = arDefault
-      FieldName = 'TP_FIELD'
-      Origin = 'RDB$FIELD_TYPE'
-      ProviderFlags = []
-    end
-    object TTabelaAtualizacaoNR_TAMANHO: TSmallintField
-      AutoGenerateValue = arDefault
-      FieldName = 'NR_TAMANHO'
-      Origin = 'RDB$FIELD_LENGTH'
-      ProviderFlags = []
-    end
-    object TTabelaAtualizacaoNR_CASASDECIMAL: TSmallintField
-      AutoGenerateValue = arDefault
-      FieldName = 'NR_CASASDECIMAL'
-      Origin = 'RDB$FIELD_SCALE'
-      ProviderFlags = []
-    end
-    object TTabelaAtualizacaoST_NULL: TSmallintField
-      AutoGenerateValue = arDefault
-      FieldName = 'ST_NULL'
-      Origin = 'RDB$NULL_FLAG'
-      ProviderFlags = []
-    end
-    object TTabelaAtualizacaoDS_VALORPADRAO: TMemoField
-      AutoGenerateValue = arDefault
-      FieldName = 'DS_VALORPADRAO'
-      Origin = 'RDB$DEFAULT_SOURCE'
+      FieldName = 'ROTULA_TABELA'
+      Origin = 'RDB$DESCRIPTION'
       ProviderFlags = []
       BlobType = ftMemo
-    end
-    object TTabelaAtualizacaoDS_SUBTIPO: TSmallintField
-      AutoGenerateValue = arDefault
-      FieldName = 'DS_SUBTIPO'
-      Origin = 'RDB$FIELD_SUB_TYPE'
-      ProviderFlags = []
-    end
-    object TTabelaAtualizacaoNR_CARACTERES: TSmallintField
-      AutoGenerateValue = arDefault
-      FieldName = 'NR_CARACTERES'
-      Origin = 'RDB$CHARACTER_LENGTH'
-      ProviderFlags = []
     end
   end
   object TCriaTabela: TJvMemoryData
     FieldDefs = <>
     Left = 360
     Top = 296
-    object TCriaTabelaNM_TABELA: TWideStringField
-      FieldName = 'NM_TABELA'
+    object TCriaTabelaTABELA: TWideStringField
+      FieldName = 'TABELA'
       Origin = 'RDB$RELATION_NAME'
       FixedChar = True
       Size = 31
     end
-    object TCriaTabelaNM_FIELD: TWideStringField
+    object TCriaTabelaCAMPO: TWideStringField
+      FieldName = 'CAMPO'
+      Origin = 'RDB$FIELD_NAME'
+      FixedChar = True
+      Size = 31
+    end
+    object TCriaTabelaDEFAULT_VALUE: TMemoField
+      FieldName = 'DEFAULT_VALUE'
+      Origin = 'RDB$DEFAULT_SOURCE'
+      BlobType = ftMemo
+    end
+    object TCriaTabelaNULL_FLAG: TSmallintField
+      FieldName = 'NULL_FLAG'
+      Origin = 'RDB$NULL_FLAG'
+    end
+    object TCriaTabelaPOSICAO: TSmallintField
+      FieldName = 'POSICAO'
+      Origin = 'RDB$FIELD_POSITION'
+    end
+    object TCriaTabelaROTULO_CAMPO: TMemoField
+      FieldName = 'ROTULO_CAMPO'
+      Origin = 'RDB$DESCRIPTION'
+      BlobType = ftMemo
+    end
+    object TCriaTabelaTAMANHO: TSmallintField
       AutoGenerateValue = arDefault
-      FieldName = 'NM_FIELD'
+      FieldName = 'TAMANHO'
+      Origin = 'RDB$CHARACTER_LENGTH'
+      ProviderFlags = []
+    end
+    object TCriaTabelaPRECISAO: TSmallintField
+      AutoGenerateValue = arDefault
+      FieldName = 'PRECISAO'
+      Origin = 'RDB$FIELD_PRECISION'
+      ProviderFlags = []
+    end
+    object TCriaTabelaTIPO: TSmallintField
+      AutoGenerateValue = arDefault
+      FieldName = 'TIPO'
+      Origin = 'RDB$FIELD_TYPE'
+      ProviderFlags = []
+    end
+    object TCriaTabelaSUBTIPO: TSmallintField
+      AutoGenerateValue = arDefault
+      FieldName = 'SUBTIPO'
+      Origin = 'RDB$FIELD_SUB_TYPE'
+      ProviderFlags = []
+    end
+    object TCriaTabelaCASASDECIMAL: TSmallintField
+      AutoGenerateValue = arDefault
+      FieldName = 'CASASDECIMAL'
+      Origin = 'RDB$FIELD_SCALE'
+      ProviderFlags = []
+    end
+    object TCriaTabelaFIELD_CAMPO: TWideStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'FIELD_CAMPO'
       Origin = 'RDB$FIELD_NAME'
       ProviderFlags = []
       FixedChar = True
       Size = 31
     end
-    object TCriaTabelaTP_FIELD: TSmallintField
+    object TCriaTabelaROTULA_TABELA: TMemoField
       AutoGenerateValue = arDefault
-      FieldName = 'TP_FIELD'
-      Origin = 'RDB$FIELD_TYPE'
-      ProviderFlags = []
-    end
-    object TCriaTabelaNR_TAMANHO: TSmallintField
-      AutoGenerateValue = arDefault
-      FieldName = 'NR_TAMANHO'
-      Origin = 'RDB$FIELD_LENGTH'
-      ProviderFlags = []
-    end
-    object TCriaTabelaNR_CASASDECIMAL: TSmallintField
-      AutoGenerateValue = arDefault
-      FieldName = 'NR_CASASDECIMAL'
-      Origin = 'RDB$FIELD_SCALE'
-      ProviderFlags = []
-    end
-    object TCriaTabelaST_NULL: TSmallintField
-      AutoGenerateValue = arDefault
-      FieldName = 'ST_NULL'
-      Origin = 'RDB$NULL_FLAG'
-      ProviderFlags = []
-    end
-    object TCriaTabelaDS_VALORPADRAO: TMemoField
-      AutoGenerateValue = arDefault
-      FieldName = 'DS_VALORPADRAO'
-      Origin = 'RDB$DEFAULT_SOURCE'
+      FieldName = 'ROTULA_TABELA'
+      Origin = 'RDB$DESCRIPTION'
       ProviderFlags = []
       BlobType = ftMemo
-    end
-    object TCriaTabelaDS_SUBTIPO: TSmallintField
-      AutoGenerateValue = arDefault
-      FieldName = 'DS_SUBTIPO'
-      Origin = 'RDB$FIELD_SUB_TYPE'
-      ProviderFlags = []
-    end
-    object TCriaTabelaNR_CARACTERES: TSmallintField
-      AutoGenerateValue = arDefault
-      FieldName = 'NR_CARACTERES'
-      Origin = 'RDB$CHARACTER_LENGTH'
-      ProviderFlags = []
     end
   end
   object TCriaField: TJvMemoryData
     FieldDefs = <>
     Left = 360
     Top = 352
-    object TCriaFieldNM_TABELA: TWideStringField
-      FieldName = 'NM_TABELA'
+    object TCriaFieldTABELA: TWideStringField
+      FieldName = 'TABELA'
       Origin = 'RDB$RELATION_NAME'
       FixedChar = True
       Size = 31
     end
-    object TCriaFieldNM_FIELD: TWideStringField
+    object TCriaFieldCAMPO: TWideStringField
+      FieldName = 'CAMPO'
+      Origin = 'RDB$FIELD_NAME'
+      FixedChar = True
+      Size = 31
+    end
+    object TCriaFieldDEFAULT_VALUE: TMemoField
+      FieldName = 'DEFAULT_VALUE'
+      Origin = 'RDB$DEFAULT_SOURCE'
+      BlobType = ftMemo
+    end
+    object TCriaFieldNULL_FLAG: TSmallintField
+      FieldName = 'NULL_FLAG'
+      Origin = 'RDB$NULL_FLAG'
+    end
+    object TCriaFieldPOSICAO: TSmallintField
+      FieldName = 'POSICAO'
+      Origin = 'RDB$FIELD_POSITION'
+    end
+    object TCriaFieldROTULO_CAMPO: TMemoField
+      FieldName = 'ROTULO_CAMPO'
+      Origin = 'RDB$DESCRIPTION'
+      BlobType = ftMemo
+    end
+    object TCriaFieldTAMANHO: TSmallintField
       AutoGenerateValue = arDefault
-      FieldName = 'NM_FIELD'
+      FieldName = 'TAMANHO'
+      Origin = 'RDB$CHARACTER_LENGTH'
+      ProviderFlags = []
+    end
+    object TCriaFieldPRECISAO: TSmallintField
+      AutoGenerateValue = arDefault
+      FieldName = 'PRECISAO'
+      Origin = 'RDB$FIELD_PRECISION'
+      ProviderFlags = []
+    end
+    object TCriaFieldTIPO: TSmallintField
+      AutoGenerateValue = arDefault
+      FieldName = 'TIPO'
+      Origin = 'RDB$FIELD_TYPE'
+      ProviderFlags = []
+    end
+    object TCriaFieldSUBTIPO: TSmallintField
+      AutoGenerateValue = arDefault
+      FieldName = 'SUBTIPO'
+      Origin = 'RDB$FIELD_SUB_TYPE'
+      ProviderFlags = []
+    end
+    object TCriaFieldCASASDECIMAL: TSmallintField
+      AutoGenerateValue = arDefault
+      FieldName = 'CASASDECIMAL'
+      Origin = 'RDB$FIELD_SCALE'
+      ProviderFlags = []
+    end
+    object TCriaFieldFIELD_CAMPO: TWideStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'FIELD_CAMPO'
       Origin = 'RDB$FIELD_NAME'
       ProviderFlags = []
       FixedChar = True
       Size = 31
     end
-    object TCriaFieldTP_FIELD: TSmallintField
+    object TCriaFieldROTULA_TABELA: TMemoField
       AutoGenerateValue = arDefault
-      FieldName = 'TP_FIELD'
-      Origin = 'RDB$FIELD_TYPE'
-      ProviderFlags = []
-    end
-    object TCriaFieldNR_TAMANHO: TSmallintField
-      AutoGenerateValue = arDefault
-      FieldName = 'NR_TAMANHO'
-      Origin = 'RDB$FIELD_LENGTH'
-      ProviderFlags = []
-    end
-    object TCriaFieldNR_CASASDECIMAL: TSmallintField
-      AutoGenerateValue = arDefault
-      FieldName = 'NR_CASASDECIMAL'
-      Origin = 'RDB$FIELD_SCALE'
-      ProviderFlags = []
-    end
-    object TCriaFieldST_NULL: TSmallintField
-      AutoGenerateValue = arDefault
-      FieldName = 'ST_NULL'
-      Origin = 'RDB$NULL_FLAG'
-      ProviderFlags = []
-    end
-    object TCriaFieldDS_VALORPADRAO: TMemoField
-      AutoGenerateValue = arDefault
-      FieldName = 'DS_VALORPADRAO'
-      Origin = 'RDB$DEFAULT_SOURCE'
+      FieldName = 'ROTULA_TABELA'
+      Origin = 'RDB$DESCRIPTION'
       ProviderFlags = []
       BlobType = ftMemo
-    end
-    object TCriaFieldDS_SUBTIPO: TSmallintField
-      AutoGenerateValue = arDefault
-      FieldName = 'DS_SUBTIPO'
-      Origin = 'RDB$FIELD_SUB_TYPE'
-      ProviderFlags = []
-    end
-    object TCriaFieldNR_CARACTERES: TSmallintField
-      AutoGenerateValue = arDefault
-      FieldName = 'NR_CARACTERES'
-      Origin = 'RDB$CHARACTER_LENGTH'
-      ProviderFlags = []
     end
   end
   object TCampoAlterado: TJvMemoryData
     FieldDefs = <>
     Left = 360
     Top = 408
-    object TCampoAlteradoNM_TABELA: TWideStringField
-      FieldName = 'NM_TABELA'
+    object TCampoAlteradoTABELA: TWideStringField
+      FieldName = 'TABELA'
       Origin = 'RDB$RELATION_NAME'
       FixedChar = True
       Size = 31
     end
-    object TCampoAlteradoNM_FIELD: TWideStringField
+    object TCampoAlteradoCAMPO: TWideStringField
+      FieldName = 'CAMPO'
+      Origin = 'RDB$FIELD_NAME'
+      FixedChar = True
+      Size = 31
+    end
+    object TCampoAlteradoDEFAULT_VALUE: TMemoField
+      FieldName = 'DEFAULT_VALUE'
+      Origin = 'RDB$DEFAULT_SOURCE'
+      BlobType = ftMemo
+    end
+    object TCampoAlteradoNULL_FLAG: TSmallintField
+      FieldName = 'NULL_FLAG'
+      Origin = 'RDB$NULL_FLAG'
+    end
+    object TCampoAlteradoPOSICAO: TSmallintField
+      FieldName = 'POSICAO'
+      Origin = 'RDB$FIELD_POSITION'
+    end
+    object TCampoAlteradoROTULO_CAMPO: TMemoField
+      FieldName = 'ROTULO_CAMPO'
+      Origin = 'RDB$DESCRIPTION'
+      BlobType = ftMemo
+    end
+    object TCampoAlteradoTAMANHO: TSmallintField
       AutoGenerateValue = arDefault
-      FieldName = 'NM_FIELD'
+      FieldName = 'TAMANHO'
+      Origin = 'RDB$CHARACTER_LENGTH'
+      ProviderFlags = []
+    end
+    object TCampoAlteradoPRECISAO: TSmallintField
+      AutoGenerateValue = arDefault
+      FieldName = 'PRECISAO'
+      Origin = 'RDB$FIELD_PRECISION'
+      ProviderFlags = []
+    end
+    object TCampoAlteradoTIPO: TSmallintField
+      AutoGenerateValue = arDefault
+      FieldName = 'TIPO'
+      Origin = 'RDB$FIELD_TYPE'
+      ProviderFlags = []
+    end
+    object TCampoAlteradoSUBTIPO: TSmallintField
+      AutoGenerateValue = arDefault
+      FieldName = 'SUBTIPO'
+      Origin = 'RDB$FIELD_SUB_TYPE'
+      ProviderFlags = []
+    end
+    object TCampoAlteradoCASASDECIMAL: TSmallintField
+      AutoGenerateValue = arDefault
+      FieldName = 'CASASDECIMAL'
+      Origin = 'RDB$FIELD_SCALE'
+      ProviderFlags = []
+    end
+    object TCampoAlteradoFIELD_CAMPO: TWideStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'FIELD_CAMPO'
       Origin = 'RDB$FIELD_NAME'
       ProviderFlags = []
       FixedChar = True
       Size = 31
     end
-    object TCampoAlteradoTP_FIELD: TSmallintField
+    object TCampoAlteradoROTULA_TABELA: TMemoField
       AutoGenerateValue = arDefault
-      FieldName = 'TP_FIELD'
-      Origin = 'RDB$FIELD_TYPE'
-      ProviderFlags = []
-    end
-    object TCampoAlteradoNR_TAMANHO: TSmallintField
-      AutoGenerateValue = arDefault
-      FieldName = 'NR_TAMANHO'
-      Origin = 'RDB$FIELD_LENGTH'
-      ProviderFlags = []
-    end
-    object TCampoAlteradoNR_CASASDECIMAL: TSmallintField
-      AutoGenerateValue = arDefault
-      FieldName = 'NR_CASASDECIMAL'
-      Origin = 'RDB$FIELD_SCALE'
-      ProviderFlags = []
-    end
-    object TCampoAlteradoST_NULL: TSmallintField
-      AutoGenerateValue = arDefault
-      FieldName = 'ST_NULL'
-      Origin = 'RDB$NULL_FLAG'
-      ProviderFlags = []
-    end
-    object TCampoAlteradoDS_VALORPADRAO: TMemoField
-      AutoGenerateValue = arDefault
-      FieldName = 'DS_VALORPADRAO'
-      Origin = 'RDB$DEFAULT_SOURCE'
+      FieldName = 'ROTULA_TABELA'
+      Origin = 'RDB$DESCRIPTION'
       ProviderFlags = []
       BlobType = ftMemo
-    end
-    object TCampoAlteradoDS_SUBTIPO: TSmallintField
-      AutoGenerateValue = arDefault
-      FieldName = 'DS_SUBTIPO'
-      Origin = 'RDB$FIELD_SUB_TYPE'
-      ProviderFlags = []
-    end
-    object TCampoAlteradoNR_CARACTERES: TSmallintField
-      AutoGenerateValue = arDefault
-      FieldName = 'NR_CARACTERES'
-      Origin = 'RDB$CHARACTER_LENGTH'
-      ProviderFlags = []
-    end
-    object TCampoAlteradoTP_CAMPOALTERADO: TStringField
-      FieldName = 'TP_CAMPOALTERADO'
-      Size = 1
     end
   end
   object TCriaGenerator: TJvMemoryData
@@ -673,9 +799,130 @@ object DMDAtualizacao: TDMDAtualizacao
     FieldDefs = <>
     Left = 440
     Top = 296
-    object TTabelaNM_TABELA: TWideStringField
+    object TTabelaTABELA: TWideStringField
+      FieldName = 'TABELA'
+      Origin = 'RDB$RELATION_NAME'
+      FixedChar = True
+      Size = 31
+    end
+  end
+  object QControlesisAtt: TFDQuery
+    Connection = conAtualizacao
+    SQL.Strings = (
+      'SELECT'
+      '*'
+      ''
+      'FROM'
+      'CONTROLESIS')
+    Left = 520
+    Top = 168
+    object QControlesisAttNM_TABELA: TStringField
+      FieldName = 'NM_TABELA'
+      Origin = 'NM_TABELA'
+      Required = True
+      Size = 50
+    end
+    object QControlesisAttDT_ATUALIZACAO: TSQLTimeStampField
+      FieldName = 'DT_ATUALIZACAO'
+      Origin = 'DT_ATUALIZACAO'
+    end
+  end
+  object QControlesisProd: TFDQuery
+    Connection = conProducao
+    SQL.Strings = (
+      'SELECT'
+      '*'
+      ''
+      'FROM'
+      'CONTROLESIS')
+    Left = 520
+    Top = 56
+    object QControlesisProdNM_TABELA: TStringField
+      FieldName = 'NM_TABELA'
+      Origin = 'NM_TABELA'
+      Required = True
+      Size = 50
+    end
+    object QControlesisProdDT_ATUALIZACAO: TSQLTimeStampField
+      FieldName = 'DT_ATUALIZACAO'
+      Origin = 'DT_ATUALIZACAO'
+    end
+  end
+  object TControlesis: TJvMemoryData
+    FieldDefs = <>
+    Left = 520
+    Top = 112
+    object TControlesisNM_TABELA: TWideStringField
       FieldName = 'NM_TABELA'
       Origin = 'RDB$RELATION_NAME'
+      FixedChar = True
+      Size = 31
+    end
+    object TControlesisDT_ATUALIZACAO: TDateTimeField
+      FieldName = 'DT_ATUALIZACAO'
+    end
+  end
+  object QAbreTabAtt: TFDQuery
+    Connection = conAtualizacao
+    SQL.Strings = (
+      'SELECT'
+      '*'
+      ''
+      'FROM'
+      'CONTROLESIS')
+    Left = 640
+    Top = 168
+  end
+  object QAbreTabProd: TFDQuery
+    Connection = conProducao
+    SQL.Strings = (
+      'SELECT'
+      '*'
+      ''
+      'FROM'
+      'CONTROLESIS')
+    Left = 640
+    Top = 56
+  end
+  object QRetornaPK: TFDQuery
+    Connection = conAtualizacao
+    SQL.Strings = (
+      'SELECT '
+      '    RDB$INDEX_SEGMENTS.RDB$FIELD_NAME AS NM_CAMPO,'
+      '    RDB$INDICES.RDB$INDEX_NAME AS NM_INDICE'
+      'FROM '
+      '    RDB$INDEX_SEGMENTS'
+      'JOIN '
+      
+        '    RDB$INDICES ON RDB$INDEX_SEGMENTS.RDB$INDEX_NAME = RDB$INDIC' +
+        'ES.RDB$INDEX_NAME'
+      'WHERE '
+      '    RDB$INDICES.RDB$INDEX_TYPE = 0'
+      '    AND RDB$INDICES.RDB$RELATION_NAME = :TABELA'
+      'ORDER BY '
+      '    RDB$INDEX_SEGMENTS.RDB$FIELD_POSITION;')
+    Left = 72
+    Top = 320
+    ParamData = <
+      item
+        Name = 'TABELA'
+        DataType = ftFixedWideChar
+        ParamType = ptInput
+        Size = 31
+        Value = Null
+      end>
+    object QRetornaPKNM_CAMPO: TWideStringField
+      FieldName = 'NM_CAMPO'
+      Origin = 'RDB$FIELD_NAME'
+      FixedChar = True
+      Size = 31
+    end
+    object QRetornaPKNM_INDICE: TWideStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'NM_INDICE'
+      Origin = 'RDB$INDEX_NAME'
+      ProviderFlags = []
+      ReadOnly = True
       FixedChar = True
       Size = 31
     end

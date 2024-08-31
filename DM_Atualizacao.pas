@@ -42,82 +42,123 @@ type
     Transacao: TFDTransaction;
     QExecutaProducao: TFDQuery;
     QTabelaAtualizacao: TFDQuery;
-    QTabelaAtualizacaoNM_TABELA: TWideStringField;
     QTabelaProducao: TFDQuery;
-    QTabelaProducaoNM_TABELA: TWideStringField;
     TTabelaProducao: TJvMemoryData;
     TTabelaAtualizacao: TJvMemoryData;
-    QTabelaProducaoNM_FIELD: TWideStringField;
-    QTabelaProducaoTP_FIELD: TSmallintField;
-    QTabelaProducaoNR_TAMANHO: TSmallintField;
-    QTabelaProducaoNR_CASASDECIMAL: TSmallintField;
-    QTabelaProducaoST_NULL: TSmallintField;
-    QTabelaProducaoDS_VALORPADRAO: TMemoField;
-    QTabelaProducaoDS_SUBTIPO: TSmallintField;
-    QTabelaProducaoNR_CARACTERES: TSmallintField;
-    QTabelaAtualizacaoNM_FIELD: TWideStringField;
-    QTabelaAtualizacaoTP_FIELD: TSmallintField;
-    QTabelaAtualizacaoNR_TAMANHO: TSmallintField;
-    QTabelaAtualizacaoNR_CASASDECIMAL: TSmallintField;
-    QTabelaAtualizacaoST_NULL: TSmallintField;
-    QTabelaAtualizacaoDS_VALORPADRAO: TMemoField;
-    QTabelaAtualizacaoDS_SUBTIPO: TSmallintField;
-    QTabelaAtualizacaoNR_CARACTERES: TSmallintField;
-    TTabelaProducaoNM_TABELA: TWideStringField;
-    TTabelaProducaoNM_FIELD: TWideStringField;
-    TTabelaProducaoTP_FIELD: TSmallintField;
-    TTabelaProducaoNR_TAMANHO: TSmallintField;
-    TTabelaProducaoNR_CASASDECIMAL: TSmallintField;
-    TTabelaProducaoST_NULL: TSmallintField;
-    TTabelaProducaoDS_VALORPADRAO: TMemoField;
-    TTabelaProducaoDS_SUBTIPO: TSmallintField;
-    TTabelaProducaoNR_CARACTERES: TSmallintField;
-    TTabelaAtualizacaoNM_TABELA: TWideStringField;
-    TTabelaAtualizacaoNM_FIELD: TWideStringField;
-    TTabelaAtualizacaoTP_FIELD: TSmallintField;
-    TTabelaAtualizacaoNR_TAMANHO: TSmallintField;
-    TTabelaAtualizacaoNR_CASASDECIMAL: TSmallintField;
-    TTabelaAtualizacaoST_NULL: TSmallintField;
-    TTabelaAtualizacaoDS_VALORPADRAO: TMemoField;
-    TTabelaAtualizacaoDS_SUBTIPO: TSmallintField;
-    TTabelaAtualizacaoNR_CARACTERES: TSmallintField;
     TCriaTabela: TJvMemoryData;
-    TCriaTabelaNM_TABELA: TWideStringField;
-    TCriaTabelaNM_FIELD: TWideStringField;
-    TCriaTabelaTP_FIELD: TSmallintField;
-    TCriaTabelaNR_TAMANHO: TSmallintField;
-    TCriaTabelaNR_CASASDECIMAL: TSmallintField;
-    TCriaTabelaST_NULL: TSmallintField;
-    TCriaTabelaDS_VALORPADRAO: TMemoField;
-    TCriaTabelaDS_SUBTIPO: TSmallintField;
-    TCriaTabelaNR_CARACTERES: TSmallintField;
     TCriaField: TJvMemoryData;
-    TCriaFieldNM_TABELA: TWideStringField;
-    TCriaFieldNM_FIELD: TWideStringField;
-    TCriaFieldTP_FIELD: TSmallintField;
-    TCriaFieldNR_TAMANHO: TSmallintField;
-    TCriaFieldNR_CASASDECIMAL: TSmallintField;
-    TCriaFieldST_NULL: TSmallintField;
-    TCriaFieldDS_VALORPADRAO: TMemoField;
-    TCriaFieldDS_SUBTIPO: TSmallintField;
-    TCriaFieldNR_CARACTERES: TSmallintField;
     TCampoAlterado: TJvMemoryData;
-    TCampoAlteradoNM_TABELA: TWideStringField;
-    TCampoAlteradoNM_FIELD: TWideStringField;
-    TCampoAlteradoTP_FIELD: TSmallintField;
-    TCampoAlteradoNR_TAMANHO: TSmallintField;
-    TCampoAlteradoNR_CASASDECIMAL: TSmallintField;
-    TCampoAlteradoST_NULL: TSmallintField;
-    TCampoAlteradoDS_VALORPADRAO: TMemoField;
-    TCampoAlteradoDS_SUBTIPO: TSmallintField;
-    TCampoAlteradoNR_CARACTERES: TSmallintField;
-    TCampoAlteradoTP_CAMPOALTERADO: TStringField;
     TCriaGenerator: TJvMemoryData;
     TCriaGeneratorSYSTEM_FLAG: TSmallintField;
     TCriaGeneratorDESCRIPTION: TMemoField;
     TCriaGeneratorGENERATOR_NAME: TStringField;
     TTabela: TJvMemoryData;
-    TTabelaNM_TABELA: TWideStringField;
+    QControlesisAtt: TFDQuery;
+    QControlesisProd: TFDQuery;
+    TControlesis: TJvMemoryData;
+    TControlesisNM_TABELA: TWideStringField;
+    TControlesisDT_ATUALIZACAO: TDateTimeField;
+    QControlesisAttNM_TABELA: TStringField;
+    QControlesisAttDT_ATUALIZACAO: TSQLTimeStampField;
+    QControlesisProdNM_TABELA: TStringField;
+    QControlesisProdDT_ATUALIZACAO: TSQLTimeStampField;
+    QTabelaProducaoTABELA: TWideStringField;
+    QTabelaProducaoCAMPO: TWideStringField;
+    QTabelaProducaoDEFAULT_VALUE: TMemoField;
+    QTabelaProducaoNULL_FLAG: TSmallintField;
+    QTabelaProducaoPOSICAO: TSmallintField;
+    QTabelaProducaoROTULO_CAMPO: TMemoField;
+    QTabelaProducaoTAMANHO: TSmallintField;
+    QTabelaProducaoPRECISAO: TSmallintField;
+    QTabelaProducaoTIPO: TSmallintField;
+    QTabelaProducaoSUBTIPO: TSmallintField;
+    QTabelaProducaoCASASDECIMAL: TSmallintField;
+    QTabelaProducaoFIELD_CAMPO: TWideStringField;
+    QTabelaProducaoROTULA_TABELA: TMemoField;
+    QTabelaAtualizacaoTABELA: TWideStringField;
+    QTabelaAtualizacaoCAMPO: TWideStringField;
+    QTabelaAtualizacaoDEFAULT_VALUE: TMemoField;
+    QTabelaAtualizacaoNULL_FLAG: TSmallintField;
+    QTabelaAtualizacaoPOSICAO: TSmallintField;
+    QTabelaAtualizacaoROTULO_CAMPO: TMemoField;
+    QTabelaAtualizacaoTAMANHO: TSmallintField;
+    QTabelaAtualizacaoPRECISAO: TSmallintField;
+    QTabelaAtualizacaoTIPO: TSmallintField;
+    QTabelaAtualizacaoSUBTIPO: TSmallintField;
+    QTabelaAtualizacaoCASASDECIMAL: TSmallintField;
+    QTabelaAtualizacaoFIELD_CAMPO: TWideStringField;
+    QTabelaAtualizacaoROTULA_TABELA: TMemoField;
+    TTabelaProducaoTABELA: TWideStringField;
+    TTabelaProducaoCAMPO: TWideStringField;
+    TTabelaProducaoDEFAULT_VALUE: TMemoField;
+    TTabelaProducaoNULL_FLAG: TSmallintField;
+    TTabelaProducaoPOSICAO: TSmallintField;
+    TTabelaProducaoROTULO_CAMPO: TMemoField;
+    TTabelaProducaoTAMANHO: TSmallintField;
+    TTabelaProducaoPRECISAO: TSmallintField;
+    TTabelaProducaoTIPO: TSmallintField;
+    TTabelaProducaoSUBTIPO: TSmallintField;
+    TTabelaProducaoCASASDECIMAL: TSmallintField;
+    TTabelaProducaoFIELD_CAMPO: TWideStringField;
+    TTabelaProducaoROTULA_TABELA: TMemoField;
+    TTabelaAtualizacaoTABELA: TWideStringField;
+    TTabelaAtualizacaoCAMPO: TWideStringField;
+    TTabelaAtualizacaoDEFAULT_VALUE: TMemoField;
+    TTabelaAtualizacaoNULL_FLAG: TSmallintField;
+    TTabelaAtualizacaoPOSICAO: TSmallintField;
+    TTabelaAtualizacaoROTULO_CAMPO: TMemoField;
+    TTabelaAtualizacaoTAMANHO: TSmallintField;
+    TTabelaAtualizacaoPRECISAO: TSmallintField;
+    TTabelaAtualizacaoTIPO: TSmallintField;
+    TTabelaAtualizacaoSUBTIPO: TSmallintField;
+    TTabelaAtualizacaoCASASDECIMAL: TSmallintField;
+    TTabelaAtualizacaoFIELD_CAMPO: TWideStringField;
+    TTabelaAtualizacaoROTULA_TABELA: TMemoField;
+    TCriaTabelaTABELA: TWideStringField;
+    TCriaTabelaCAMPO: TWideStringField;
+    TCriaTabelaDEFAULT_VALUE: TMemoField;
+    TCriaTabelaNULL_FLAG: TSmallintField;
+    TCriaTabelaPOSICAO: TSmallintField;
+    TCriaTabelaROTULO_CAMPO: TMemoField;
+    TCriaTabelaTAMANHO: TSmallintField;
+    TCriaTabelaPRECISAO: TSmallintField;
+    TCriaTabelaTIPO: TSmallintField;
+    TCriaTabelaSUBTIPO: TSmallintField;
+    TCriaTabelaCASASDECIMAL: TSmallintField;
+    TCriaTabelaFIELD_CAMPO: TWideStringField;
+    TCriaTabelaROTULA_TABELA: TMemoField;
+    TCriaFieldTABELA: TWideStringField;
+    TCriaFieldCAMPO: TWideStringField;
+    TCriaFieldDEFAULT_VALUE: TMemoField;
+    TCriaFieldNULL_FLAG: TSmallintField;
+    TCriaFieldPOSICAO: TSmallintField;
+    TCriaFieldROTULO_CAMPO: TMemoField;
+    TCriaFieldTAMANHO: TSmallintField;
+    TCriaFieldPRECISAO: TSmallintField;
+    TCriaFieldTIPO: TSmallintField;
+    TCriaFieldSUBTIPO: TSmallintField;
+    TCriaFieldCASASDECIMAL: TSmallintField;
+    TCriaFieldFIELD_CAMPO: TWideStringField;
+    TCriaFieldROTULA_TABELA: TMemoField;
+    TCampoAlteradoTABELA: TWideStringField;
+    TCampoAlteradoCAMPO: TWideStringField;
+    TCampoAlteradoDEFAULT_VALUE: TMemoField;
+    TCampoAlteradoNULL_FLAG: TSmallintField;
+    TCampoAlteradoPOSICAO: TSmallintField;
+    TCampoAlteradoROTULO_CAMPO: TMemoField;
+    TCampoAlteradoTAMANHO: TSmallintField;
+    TCampoAlteradoPRECISAO: TSmallintField;
+    TCampoAlteradoTIPO: TSmallintField;
+    TCampoAlteradoSUBTIPO: TSmallintField;
+    TCampoAlteradoCASASDECIMAL: TSmallintField;
+    TCampoAlteradoFIELD_CAMPO: TWideStringField;
+    TCampoAlteradoROTULA_TABELA: TMemoField;
+    TTabelaTABELA: TWideStringField;
+    QAbreTabAtt: TFDQuery;
+    QAbreTabProd: TFDQuery;
+    QRetornaPK: TFDQuery;
+    QRetornaPKNM_CAMPO: TWideStringField;
+    QRetornaPKNM_INDICE: TWideStringField;
     procedure DataModuleCreate(Sender: TObject);
   private
     iArq: TIniFile;
@@ -137,6 +178,9 @@ type
     procedure IncrementaProgresso;
     procedure IncrementaSubProgresso;
     procedure ResetaProgresso;
+    procedure PegaDiferencaControlesis;
+    procedure AtualizaControlesis;
+    function RetornaPK(ATabela: string; AConexao: TFDConnection): string;
     { Private declarations }
   public
     Progresso: TProgressBar;
@@ -145,10 +189,6 @@ type
     function TemAtualizacao: Boolean;
     { Public declarations }
   end;
-
-const
-  C_TIPO: String = 'T';
-  C_TAMANHO: string = 'N';
 
 var
   DMDAtualizacao: TDMDAtualizacao;
@@ -162,6 +202,79 @@ uses Funcoes;
 
 { TDMDAtualizacao }
 
+procedure TDMDAtualizacao.PegaDiferencaControlesis;
+begin
+  QControlesisAtt.Close;
+  QControlesisAtt.Open;
+  QControlesisProd.Close;
+  QControlesisProd.Open;
+
+  TControlesis.Close;
+  TControlesis.Open;
+
+  QControlesisAtt.First;
+  while not QControlesisAtt.Eof do
+  begin
+    // Se a controlesis atualizacao estiver com data maior que a da produção, então deve atualizar os registros da tabela
+    // ou Se não encontrar a tabela na controlesis de producao deve adicionar na tabela de memoria pois é uma tabela nova
+    if ((QControlesisProd.Locate('NM_TABELA', QControlesisAttNM_TABELA.AsString, [])) and
+       (QControlesisProdDT_ATUALIZACAO.AsDateTime < QControlesisAttDT_ATUALIZACAO.AsDateTime)) or
+       (not QControlesisProd.Locate('NM_TABELA', QControlesisAttNM_TABELA.AsString, [])) then
+    begin
+      GravaLog('Controlesis: ' + QControlesisAttNM_TABELA.AsString + ' ' + QControlesisAttDT_ATUALIZACAO.AsString);
+      CopiaRegistro(QControlesisAtt, TControlesis);
+    end;
+
+    QControlesisAtt.Next;
+  end;
+end;
+
+//***********************************************************
+procedure TDMDAtualizacao.AtualizaControlesis;
+var
+  lvTabela: string;
+begin
+  if TControlesis.IsEmpty then
+    Exit;
+
+  TControlesis.First;
+  while not TControlesis.Eof do
+  begin
+    lvTabela := TControlesisNM_TABELA.AsString;
+    QAbreTabAtt.Close;
+    QAbreTabAtt.Open('SELECT * FROM ' + lvTabela);
+
+    QAbreTabProd.Close;
+    QAbreTabProd.Open('SELECT * FROM ' + lvTabela);
+
+    QAbreTabAtt.First;
+    while not QAbreTabAtt.Eof do
+    begin
+      if not QAbreTabProd.Locate(RetornaPK(lvTabela, conProducao), RetornaPK(lvTabela, conAtualizacao), []) then
+      begin
+        // se não achar a chave primaria ele deve inserir o valor do banco atualizacao no banco producao
+      end;
+
+      QAbreTabAtt.Next;
+    end;
+
+
+    TControlesis.Delete;
+  end;
+end;
+
+//***********************************************************
+function TDMDAtualizacao.RetornaPK(ATabela: string; AConexao: TFDConnection): string;
+begin
+  QRetornaPK.Close;
+  QRetornaPK.Connection := AConexao;
+  QRetornaPK.ParamByName('TABELA').AsString := ATabela;
+  QRetornaPK.Open;
+
+  Result := QRetornaPKNM_CAMPO.AsString;
+end;
+
+//***********************************************************
 procedure TDMDAtualizacao.AtualizaField;
 var
   lvTabela, lvCampoTemp, lvCampo, lvTipoCampo: string;
@@ -172,23 +285,23 @@ begin
   TCampoAlterado.First;
   while not TCampoAlterado.Eof do
   begin
-    lvTabela    := TCampoAlteradoNM_TABELA.AsString;
-    lvCampo     := TCampoAlteradoNM_FIELD.AsString;
+    lvTabela    := TCampoAlteradoTABELA.AsString;
+    lvCampo     := TCampoAlteradoCAMPO.AsString;
     lvCampoTemp := lvCampo + '_TEMP ';
 
-    if PesquisaOcorrencia(TCampoAlteradoTP_FIELD.AsInteger, [C_DECIMAL, C_NUMERIC]) then
-      lvTipoCampo := ConverteTipo(TCampoAlteradoTP_FIELD.AsInteger) + '(' + TCampoAlteradoNR_TAMANHO.AsString + ',' + IntToStr(Abs(TCampoAlteradoNR_CASASDECIMAL.AsInteger)) + ')'
-    else if TCampoAlteradoTP_FIELD.AsInteger = C_BLOB then
+    if PesquisaOcorrencia(TCampoAlteradoTIPO.AsInteger, [C_DECIMAL, C_NUMERIC]) then
+      lvTipoCampo := ConverteTipo(TCampoAlteradoTIPO.AsInteger) + '(' + TCampoAlteradoPRECISAO.AsString + ',' + IntToStr(Abs(TCampoAlteradoCASASDECIMAL.AsInteger)) + ')'
+    else if TCampoAlteradoTIPO.AsInteger = C_BLOB then
       lvTipoCampo := 'BLOB SUB_TYPE 0'
-    else if TCampoAlteradoTP_FIELD.AsInteger = C_VARCHAR then
-      lvTipoCampo := 'VARCHAR(' + TCampoAlteradoNR_CARACTERES.AsString + ')'
+    else if TCampoAlteradoTIPO.AsInteger = C_VARCHAR then
+      lvTipoCampo := 'VARCHAR(' + TCampoAlteradoTAMANHO.AsString + ')'
     else
-      lvTipoCampo := ConverteTipo(TCampoAlteradoTP_FIELD.AsInteger);
+      lvTipoCampo := ConverteTipo(TCampoAlteradoTIPO.AsInteger);
 
     // 1. Adicionar uma nova coluna temporária
     QExecutaProducao.ExecSQL('ALTER TABLE ' + lvTabela + ' ADD ' + lvCampoTemp + ' ' + lvTipoCampo + ';');
     // 2. Converter e copiar os dados
-    if PesquisaOcorrencia(TCampoAlteradoTP_FIELD.AsInteger, [C_BLOB, C_VARCHAR]) then
+    if PesquisaOcorrencia(TCampoAlteradoTIPO.AsInteger, [C_BLOB, C_VARCHAR]) then
       QExecutaProducao.ExecSQL('UPDATE ' + lvTabela + ' SET ' + lvCampoTemp + ' = ' + lvCampo + ';')
     else
       QExecutaProducao.ExecSQL('UPDATE ' + lvTabela + ' SET ' + lvCampoTemp + ' = CAST(' + lvCampo + ' AS ' + lvTipoCampo + ');');
@@ -287,17 +400,17 @@ begin
   TCriaField.First;
   while not TCriaField.Eof do
   begin
-    if PesquisaOcorrencia(TCriaFieldTP_FIELD.AsInteger, [C_DECIMAL, C_NUMERIC]) then
-      lvTipoCampo := ConverteTipo(TCriaFieldTP_FIELD.AsInteger) + '(' + TCriaFieldNR_TAMANHO.AsString + ',' + IntToStr(Abs(TCriaFieldNR_CASASDECIMAL.AsInteger)) + ')'
-    else if TCriaFieldTP_FIELD.AsInteger = C_BLOB then
+    if PesquisaOcorrencia(TCriaFieldTIPO.AsInteger, [C_DECIMAL, C_NUMERIC]) then
+      lvTipoCampo := ConverteTipo(TCriaFieldTIPO.AsInteger) + '(' + TCriaFieldPRECISAO.AsString + ',' + IntToStr(Abs(TCriaFieldCASASDECIMAL.AsInteger)) + ')'
+    else if TCriaFieldTIPO.AsInteger = C_BLOB then
       lvTipoCampo := 'BLOB SUB_TYPE 0'
-    else if TCriaFieldTP_FIELD.AsInteger = C_VARCHAR then
-      lvTipoCampo := 'VARCHAR(' + TCriaFieldNR_CARACTERES.AsString + ')'
+    else if TCriaFieldTIPO.AsInteger = C_VARCHAR then
+      lvTipoCampo := 'VARCHAR(' + TCriaFieldTAMANHO.AsString + ')'
     else
-      lvTipoCampo := ConverteTipo(TCriaFieldTP_FIELD.AsInteger);
+      lvTipoCampo := ConverteTipo(TCriaFieldTIPO.AsInteger);
 
-    GravaLog('Criando Field ' + TCriaFieldNM_FIELD.AsString + ' na tabela ' + TCriaFieldNM_TABELA.AsString);
-    QExecutaProducao.ExecSQL('ALTER TABLE ' + TCriaFieldNM_TABELA.AsString + ' ADD ' + TCriaFieldNM_FIELD.AsString + ' ' + lvTipoCampo + ';');
+    GravaLog('Criando Field ' + TCriaFieldCAMPO.AsString + ' na tabela ' + TCriaFieldTABELA.AsString);
+    QExecutaProducao.ExecSQL('ALTER TABLE ' + TCriaFieldTABELA.AsString + ' ADD ' + TCriaFieldCAMPO.AsString + ' ' + lvTipoCampo + ';');
     IncrementaProgresso;
     IncrementaSubProgresso;
     TCriaField.Delete;
@@ -395,26 +508,18 @@ begin
   TTabelaAtualizacao.First;
   while not TTabelaAtualizacao.Eof do
   begin
-    lvTabela := TTabelaAtualizacaoNM_TABELA.AsString;
-    if not TTabelaProducao.Locate('NM_TABELA', TTabelaAtualizacaoNM_TABELA.AsString, []) then
+    lvTabela := TTabelaAtualizacaoTABELA.AsString;
+    if not TTabelaProducao.Locate('TABELA', TTabelaAtualizacaoTABELA.AsString, []) then
     begin
       CopiaTabelaInexistente(lvTabela);
       Continue;
     end
-    else if not TTabelaProducao.Locate('NM_TABELA;NM_FIELD', VarArrayOf([TTabelaAtualizacaoNM_TABELA.AsString, TTabelaAtualizacaoNM_FIELD.AsString]), []) then
+    else if not TTabelaProducao.Locate('TABELA;CAMPO', VarArrayOf([TTabelaAtualizacaoTABELA.AsString, TTabelaAtualizacaoCAMPO.AsString]), []) then
       CopiaRegistro(TTabelaAtualizacao, TCriaField)
     else if TipoCampoAlterado then
-    begin
-      CopiaRegistro(TTabelaAtualizacao, TCampoAlterado, True, False);
-      TCampoAlteradoTP_CAMPOALTERADO.AsString := C_TIPO;
-      TCampoAlterado.Post;
-    end
+      CopiaRegistro(TTabelaAtualizacao, TCampoAlterado)
     else if TamanhoCampoAlterado then
-    begin
-      CopiaRegistro(TTabelaAtualizacao, TCampoAlterado, True, False);
-      TCampoAlteradoTP_CAMPOALTERADO.AsString := C_TAMANHO;
-      TCampoAlterado.Post;
-    end;
+      CopiaRegistro(TTabelaAtualizacao, TCampoAlterado);
 
     TTabelaAtualizacao.Next;
   end;
@@ -423,11 +528,11 @@ end;
 //***********************************************************
 function TDMDAtualizacao.TamanhoCampoAlterado: Boolean;
 begin
-  if TTabelaProducaoTP_FIELD.AsInteger = C_DECIMAL then
-    Result := (TTabelaProducaoNR_TAMANHO.AsInteger <> TTabelaAtualizacaoNR_TAMANHO.AsInteger) or
-              (TTabelaProducaoNR_CASASDECIMAL.AsInteger <> TTabelaAtualizacaoNR_CASASDECIMAL.AsInteger)
+  if TTabelaProducaoTIPO.AsInteger = C_DECIMAL then
+    Result := (TTabelaProducaoTAMANHO.AsInteger <> TTabelaAtualizacaoTAMANHO.AsInteger) or
+              (TTabelaProducaoCASASDECIMAL.AsInteger <> TTabelaAtualizacaoCASASDECIMAL.AsInteger)
   else
-    Result := TTabelaProducaoNR_TAMANHO.AsInteger <> TTabelaAtualizacaoNR_TAMANHO.AsInteger;
+    Result := TTabelaProducaoTAMANHO.AsInteger <> TTabelaAtualizacaoTAMANHO.AsInteger;
 end;
 
 //***********************************************************
@@ -435,23 +540,25 @@ end;
 begin
   PegaDiferencaGenerators;
   PegaDiferencaTabelas;
-  Result := not (TCriaGenerator.IsEmpty and TCriaTabela.IsEmpty and TCampoAlterado.IsEmpty and TCriaField.IsEmpty);
+//  PegaDiferencaControlesis;
+  Result := not (TCriaGenerator.IsEmpty and TCriaTabela.IsEmpty and TCampoAlterado.IsEmpty and TCriaField.IsEmpty and
+                 TControlesis.IsEmpty);
 end;
 
 //***********************************************************
 function TDMDAtualizacao.TipoCampoAlterado: Boolean;
 begin
-  Result := TTabelaProducaoTP_FIELD.AsInteger <> TTabelaAtualizacaoTP_FIELD.AsInteger;
+  Result := TTabelaProducaoTIPO.AsInteger <> TTabelaAtualizacaoTIPO.AsInteger;
 end;
 
 //***********************************************************
 procedure TDMDAtualizacao.CopiaTabelaInexistente(ATabela: String);
 begin
   TTabela.Append;
-  TTabelaNM_TABELA.AsString := TTabelaAtualizacaoNM_TABELA.AsString;
+  TTabelaTABELA.AsString := TTabelaAtualizacaoTABELA.AsString;
   TTabela.Post;
 
-  while TTabelaAtualizacaoNM_TABELA.AsString = ATabela do
+  while TTabelaAtualizacaoTABELA.AsString = ATabela do
   begin
     CopiaRegistro(TTabelaAtualizacao, TCriaTabela);
     TTabelaAtualizacao.Next;
@@ -477,14 +584,14 @@ begin
   while not TTabela.Eof do
   begin
     TCriaTabela.Filtered  := False;
-    TCriaTabela.Filter    := 'NM_TABELA = ' + QuotedStr(TTabelaNM_TABELA.AsString);
+    TCriaTabela.Filter    := 'TABELA = ' + QuotedStr(TTabelaTABELA.AsString);
     TCriaTabela.Filtered  := True;
 
     i         := 0;
     Virgula   := '';
 
     QExecutaProducao.SQL.Clear;
-    QExecutaProducao.SQL.Add('CREATE TABLE ' + TTabelaNM_TABELA.AsString + '(');
+    QExecutaProducao.SQL.Add('CREATE TABLE ' + TTabelaTABELA.AsString + '(');
 
     TCriaTabela.First;
     while not TCriaTabela.Eof do
@@ -493,23 +600,23 @@ begin
       if i > 1 then
         Virgula := ',';
 
-      lvTipoCampo := TCriaTabelaTP_FIELD.AsInteger;
+      lvTipoCampo := TCriaTabelaCAMPO.AsInteger;
 
       if PesquisaOcorrencia(lvTipoCampo, [C_VARCHAR, C_CHAR]) then
-        Tamanho := '(' + TCriaTabelaNR_CARACTERES.AsString + ')'
+        Tamanho := '(' + TCriaTabelaTAMANHO.AsString + ')'
       else if  PesquisaOcorrencia(lvTipoCampo, [C_NUMERIC, C_DECIMAL]) then
-        Tamanho := '(' + TCriaTabelaNR_TAMANHO.AsString + ', ' + IntToStr(abs(TCriaTabelaNR_CASASDECIMAL.AsInteger)) + ')'
+        Tamanho := '(' + TCriaTabelaPRECISAO.AsString + ', ' + IntToStr(abs(TCriaTabelaCASASDECIMAL.AsInteger)) + ')'
       else if (lvTipoCampo = C_BLOB) then
         Tamanho := ' SUB_TYPE 0'
       else
-        Tamanho := TCriaTabelaNR_CARACTERES.AsString;
+        Tamanho := TCriaTabelaTAMANHO.AsString;
 
-      if TCriaTabelaST_NULL.AsInteger = 1 then
+      if TCriaTabelaNULL_FLAG.AsInteger = 1 then
         NaoNulo := ' NOT NULL '
       else
         NaoNulo := '';
 
-      QExecutaProducao.SQL.Add(Virgula + TCriaTabelaNM_FIELD.AsString + ' ' + ConverteTipo(lvTipoCampo) + ' ' + Tamanho + ' ' + TCriaTabelaDS_VALORPADRAO.AsString + NaoNulo);
+      QExecutaProducao.SQL.Add(Virgula + TCriaTabelaTABELA.AsString + ' ' + ConverteTipo(lvTipoCampo) + ' ' + Tamanho + ' ' + TCriaTabelaDEFAULT_VALUE.AsString + NaoNulo);
       IncrementaSubProgresso;
       TCriaTabela.Delete;
     end;

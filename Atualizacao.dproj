@@ -86,6 +86,9 @@
         <AppDPIAwarenessMode>PerMonitorV2</AppDPIAwarenessMode>
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
         <VerInfo_Locale>1033</VerInfo_Locale>
+        <Icon_MainIcon>Atualizacao_Icon.ico</Icon_MainIcon>
+        <UWP_DelphiLogo44>server-traffic_10358177.png</UWP_DelphiLogo44>
+        <UWP_DelphiLogo150>server-traffic_10358177.png</UWP_DelphiLogo150>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2)'!=''">
         <DCC_LocalDebugSymbols>false</DCC_LocalDebugSymbols>
@@ -101,7 +104,7 @@
             <MainSource>MainSource</MainSource>
         </DelphiCompile>
         <DCCReference Include="F_Atualizacao.pas">
-            <Form>Form1</Form>
+            <Form>FAtualizadorOphera</Form>
             <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="DM_Atualizacao.pas">
@@ -111,6 +114,10 @@
         </DCCReference>
         <DCCReference Include="F:\Projetos\Restaguarda e PDV\Comum\Funcoes.pas"/>
         <DCCReference Include="F:\Projetos\Restaguarda e PDV\Comum\Constantes.pas"/>
+        <DCCReference Include="F:\Projetos\Restaguarda e PDV\View\Comum\uFormulario.pas">
+            <Form>Formulario</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>
@@ -140,6 +147,13 @@
                 <DeployFile LocalName="Win32\Debug\Atualizacao.exe" Configuration="Debug" Class="ProjectOutput">
                     <Platform Name="Win32">
                         <RemoteName>Atualizacao.exe</RemoteName>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="server-traffic_10358177.png" Configuration="Debug" Class="UWP_DelphiLogo44">
+                    <Platform Name="Win32">
+                        <RemoteDir>Assets\</RemoteDir>
+                        <RemoteName>Logo44x44.png</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>

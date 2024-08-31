@@ -35,7 +35,7 @@ implementation
 
 procedure TFAtualizadorOphera.btnAtualizarClick(Sender: TObject);
 begin
-  DMDAtualizacao.TemAtualizacao;
+//  DMDAtualizacao.TemAtualizacao;
   DMDAtualizacao.Progresso := pbProgresso;
   DMDAtualizacao.SubProgresso := pbSubProgresso;
   if DMDAtualizacao.AtualizaBanco then

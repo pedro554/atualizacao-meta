@@ -19,8 +19,8 @@ object FAtualizadorOphera: TFAtualizadorOphera
     Height = 84
     Align = alBottom
     TabOrder = 0
-    ExplicitTop = 8
-    ExplicitWidth = 628
+    ExplicitTop = 4
+    ExplicitWidth = 495
     object pbProgresso: TProgressBar
       Left = 91
       Top = 8
